@@ -7,7 +7,8 @@
 ////// time complexity n^2
 
 template <typename T, size_t n>
-void insertion_sort(std::array<T, n>& arr){
+void insertion_sort(std::array<T, n>& arr)
+{
 
     int i = 0;
 
