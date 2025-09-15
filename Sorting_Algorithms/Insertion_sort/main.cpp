@@ -64,9 +64,9 @@ void measureSort(std::array<T, N>& arr, const std::string& name)
     insertion_sort(arr);
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::micro> duration = end - start;
+    std::chrono::duration<double, std::nano> duration = end - start;
     std::cout << BLUE << name << " (" << YELLOW << N << BLUE << " elements) " << "took " << 
-            YELLOW << duration.count() << " us\n" << RESET;
+            YELLOW << duration.count() << " ns\n" << RESET;
     Checker(arr);
 }
 
