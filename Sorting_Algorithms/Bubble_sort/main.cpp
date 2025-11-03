@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <chrono>
 #include <random>
-#include "merge_sort.tpp"
+#include "bubble_sort.tpp"
 
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -61,7 +61,7 @@ void measureSort(std::array<T, N>& arr, const std::string& name)
 {
     auto start = std::chrono::high_resolution_clock::now();
 
-    merge_sort(arr);
+    bubble_sort(arr);
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::nano> duration = end - start;
@@ -113,7 +113,7 @@ int main()
     measureSort(arr4, "Array 4");
     measureSort(arr5, "Array 5");
 
-    measureSort(arr6, "Array_for_compare_with_bubble");
+    measureSort(arr6, "Array_for_compare_with_merge");
 
     return(0);
 }
