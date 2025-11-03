@@ -1,5 +1,5 @@
-#ifndef BUBBLE_SORT_HPP
-#define BUBBLE_SORT_HPP
+#ifndef MERGE_SORT_HPP
+#define MERGE_SORT_HPP
 
 #include <array>
 #include <cstddef>
