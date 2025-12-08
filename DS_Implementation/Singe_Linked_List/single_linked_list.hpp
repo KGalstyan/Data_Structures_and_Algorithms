@@ -16,7 +16,7 @@ class single_linked_list
         single_linked_list& operator=(const single_linked_list& other);
         single_linked_list(single_linked_list&& other) noexcept;
         single_linked_list& operator=(single_linked_list&& other) noexcept;
-        ~single_linked_list() { std::cout << "descall\n" , clear(); }
+        ~single_linked_list() { clear(); }
 
         // ---- Basic operations ----
 
@@ -30,14 +30,14 @@ class single_linked_list
 
         // ---- Insertions ----
 
-        template <typename... Args> void insert(Node<T> *position, Args&&... args);
-        template <typename... Args> void push_front(Args&&... args);
-        template <typename... Args> void push_back(Args&&... args);
+        template <typename... Args> void insert(Node<T> *position, Args&&... values);
+        template <typename... Args> void push_front(Args&&... values);
+        template <typename... Args> void push_back(Args&&... values);
 
         void pop_front();
         void pop_back();
 
-        // ---- Reverse / Unique / Sort ----
+        // ---- Reverse / Unique / Sort / Splice ----
 
         void splice(single_linked_list<T>& other);
         void reverse();
@@ -59,3 +59,5 @@ class single_linked_list
     private:
        Node<T>* head = nullptr;
 };
+
+#include "Single_linked_list.tpp"
