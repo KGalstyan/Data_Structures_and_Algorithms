@@ -103,12 +103,11 @@ const Node<T>* single_linked_list<T>::first() const
 template <typename T>
 const Node<T>* single_linked_list<T>::last() const
 {
-    if (!head) return nullptr;
+    if (!head)
+        return nullptr;
     const Node<T>* curr = head;
     while (curr->next)
-    {
         curr = curr->next;
-    }
     return curr;
 }
 
@@ -118,8 +117,8 @@ template <typename T>
 template <typename... Args>
 void single_linked_list<T>::insert(Node<T> *position, Args&&... values)
 {
-    // if position is nullptr, insert at front
-    if (!position) {
+    if (!position)
+    {
         push_front(std::forward<Args>(values)...);
         return;
     }
@@ -184,34 +183,6 @@ void single_linked_list<T>::pop_back()
     }
 }
 
-//____________________ Remove ____________________
-
-template <typename T>
-void single_linked_list<T>::remove(const T& value)
-{
-    while (head && head->data == value) {
-        Node<T>* tmp = head;
-        head = head->next;
-        delete tmp;
-    }
-    Node<T>* curr = head;
-    while (curr && curr->next) {
-        if (curr->next->data == value) {
-            Node<T>* tmp = curr->next;
-            curr->next = tmp->next;
-            delete tmp;
-        } else {
-            curr = curr->next;
-        }
-    }
-}
-
-template <typename T>
-template <typename... Args>
-void single_linked_list<T>::remove_by_value(Args&&... args)
-{
-    remove(std::forward<Args>(args)...);
-}
 
 //____________________ Clear ____________________
 
