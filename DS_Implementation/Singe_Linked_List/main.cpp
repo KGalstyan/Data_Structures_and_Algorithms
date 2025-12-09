@@ -1,6 +1,13 @@
 #include <iostream>
 #include "single_linked_list.hpp"
 
+struct Person {
+    std::string name;
+    int age;
+
+    Person(std::string n, int a) : name(std::move(n)), age(a) {}
+};
+
 int main()
 {
     std::cout << "===== BASIC INSERTION TESTS =====\n";
@@ -48,15 +55,13 @@ int main()
         std::cout << n->data << " ";
     std::cout << "\n";
 
-    // Modify original to ensure deep copy
-    list.push_front(777);
+    list.push_front(777); // modify original
 
     std::cout << "Original after modification: ";
     for (auto* n = list.first(); n; n = n->next)
         std::cout << n->data << " ";
-    std::cout << "\n";
 
-    std::cout << "Copy must not change: ";
+    std::cout << "\nCopy must not change: ";
     for (auto* n = copy_list.first(); n; n = n->next)
         std::cout << n->data << " ";
     std::cout << "\n\n";
@@ -76,13 +81,7 @@ int main()
     single_linked_list<int> moved(std::move(list));
 
     std::cout << "Moved-from list (should be empty): ";
-    if (list.first())
-    {
-        for (auto* n = list.first(); n; n = n->next)
-            std::cout << n->data << " ";
-    }
-    else
-        std::cout << "(empty)";
+    if (!list.first()) std::cout << "(empty)";
     std::cout << "\n";
 
     std::cout << "Moved-to list: ";
@@ -108,7 +107,60 @@ int main()
     std::cout << "===== CLEAR TEST =====\n";
     move_assigned.clear();
     std::cout << "After clear, size = " << move_assigned.size() << "\n";
-    std::cout << "Is empty: " << std::boolalpha << move_assigned.is_empty() << "\n";
+    std::cout << "Is empty: " << std::boolalpha << move_assigned.is_empty() << "\n\n";
+
+
+    // ================================================================
+    //            VARIADIC TEMPLATE TESTING (IMPORTANT!)
+    // ================================================================
+    std::cout << "===== VARIADIC TEMPLATE TESTS =====\n";
+
+    single_linked_list<Person> persons;
+
+    persons.push_front("Karen", 17);
+    persons.push_back("Anna", 19);
+    persons.push_front("Mark", 21);
+
+    std::cout << "Persons list: ";
+    for (auto* n = persons.first(); n; n = n->next)
+        std::cout << n->data.name << " (" << n->data.age << ")  ";
+    std::cout << "\n\n";
+
+    // insert using variadic constructor
+    persons.insert(persons.first(), "Inserted", 99);
+
+    std::cout << "After insert(Person): ";
+    for (auto* n = persons.first(); n; n = n->next)
+        std::cout << n->data.name << " (" << n->data.age << ")  ";
+    std::cout << "\n\n";
+
+
+    // ===================================================================
+    //                REMOVE + REMOVE_BY_VALUES   (VARIADIC TEST)
+    // ===================================================================
+    std::cout << "===== REMOVE / REMOVE_BY_VALUES TESTS =====\n";
+
+    single_linked_list<int> nums;
+    nums.push_back(1);
+    nums.push_back(2);
+    nums.push_back(3);
+    nums.push_back(2);
+    nums.push_back(4);
+    nums.push_back(2);
+    nums.push_back(5);
+
+    std::cout << "Nums before remove: ";
+    for(auto* n = nums.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    nums.remove(2);
+
+    std::cout << "After remove(2): ";
+        std::cout << "Nums before remove: ";
+    for(auto* n = nums.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
 
     return 0;
 }

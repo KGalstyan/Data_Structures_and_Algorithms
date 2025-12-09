@@ -46,7 +46,7 @@ class single_linked_list
 
         // ---- Remove ----
 
-        template <typename... Args> void remove_by_value(Args&&... args);
+        template <typename... Args> void remove_by_values(Args&&... values);
         void remove(const T& value);
         void clear();
 

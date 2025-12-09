@@ -184,7 +184,7 @@ void single_linked_list<T>::pop_back()
 }
 
 
-//____________________ Clear ____________________
+//____________________ Clear & Remove  ____________________
 
 template <typename T>
 void single_linked_list<T>::clear()
@@ -195,4 +195,35 @@ void single_linked_list<T>::clear()
         head = head->next;
         delete temp;
     }
+}
+
+template <typename T>
+void single_linked_list<T>::remove(const T& value)
+{
+    while(head && head->data == value)
+    {
+        Node<T>* tmp = head->next;
+        delete head;
+        head = tmp;
+    }
+    Node<T>*curr = head;
+    while(curr && curr->next)
+    {
+        if(curr->next->data == value)
+        {
+            Node<T>* tmp = curr->next;
+            curr->next = curr->next->next;
+            delete tmp;
+        }
+        else
+            curr = curr->next;
+    }
+}
+
+template <typename T>
+template <typename... Args> void single_linked_list<T>::remove_by_values(Args&&... values) // will fix
+{
+    Node<T>* p_newNode = new Node<T>(std::forward<Args>(values)...);
+    remove(p_newNode->data);
+    remove(T(std::forward<Args>(values)...));
 }
