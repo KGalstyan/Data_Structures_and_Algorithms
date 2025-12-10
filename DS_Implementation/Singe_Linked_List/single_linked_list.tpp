@@ -1,4 +1,5 @@
 #include "single_linked_list.hpp"
+// #include "../Sort_Algorithms/Quick_sort/quick_sort.tpp"
 
 //____________________ Constructors & Destructor ____________________
 
@@ -182,6 +183,53 @@ void single_linked_list<T>::pop_back()
         }
     }
 }
+
+//____________________ Splice / Reverse / Unique / Sort ____________________
+
+template <typename T>
+void single_linked_list<T>::splice(single_linked_list<T>& other)
+{
+    if(head == nullptr)
+        head = other.head;
+    else
+    {
+        Node<T>* tail = last();
+        tail->next = other.head;
+    }
+    other.head = nullptr;
+}
+
+template <typename T>
+void single_linked_list<T>::reverse()
+{
+    Node<T>* prev = nullptr;
+    Node<T>* curr = head;
+    Node<T>* next = nullptr;
+
+    while(curr)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    head = prev;
+}
+// template <typename T>
+// void single_linked_list<T>::unique()
+// {
+
+// }
+
+
+//template <typename T>
+// void single_linked_list<T>::sort()
+// {
+//     //std::array<int, 100> arr1;
+//     //quick_sort()
+// }
+
 
 
 //____________________ Clear & Remove  ____________________

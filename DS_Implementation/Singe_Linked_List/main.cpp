@@ -109,6 +109,63 @@ int main()
     std::cout << "After clear, size = " << move_assigned.size() << "\n";
     std::cout << "Is empty: " << std::boolalpha << move_assigned.is_empty() << "\n\n";
 
+    // ===================================================================
+    //                     REVERSE & SPLICE TEST
+    // ===================================================================
+
+    std::cout << "===== REVERSE TEST =====\n";
+    single_linked_list<int> rev;
+    rev.push_back(1);
+    rev.push_back(2);
+    rev.push_back(3);
+    rev.push_back(4);
+
+    std::cout << "Before reverse: ";
+    for (auto* n = rev.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    rev.reverse();
+
+    std::cout << "After reverse:  ";
+    for (auto* n = rev.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n\n";
+
+
+    std::cout << "===== SPLICE TEST =====\n";
+    single_linked_list<int> A;
+    A.push_back(1);
+    A.push_back(2);
+    A.push_back(3);
+
+    single_linked_list<int> B;
+    B.push_back(100);
+    B.push_back(200);
+
+    std::cout << "A before splice: ";
+    for (auto* n = A.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    std::cout << "B before splice: ";
+    for (auto* n = B.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    A.splice(B);
+
+    std::cout << "A after splice:  ";
+    for (auto* n = A.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    std::cout << "B after splice (should be empty): ";
+    if (B.size() == 0) 
+        std::cout << "(empty)";
+    std::cout << "\n\n";
+
+
 
     // ================================================================
     //            VARIADIC TEMPLATE TESTING (IMPORTANT!)
