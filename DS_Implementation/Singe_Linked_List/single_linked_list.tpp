@@ -1,5 +1,6 @@
 #include "single_linked_list.hpp"
-// #include "../Sort_Algorithms/Quick_sort/quick_sort.tpp"
+#include <algorithm>
+#include <vector>
 
 //____________________ Constructors & Destructor ____________________
 
@@ -216,21 +217,35 @@ void single_linked_list<T>::reverse()
 
     head = prev;
 }
-// template <typename T>
-// void single_linked_list<T>::unique()
-// {
+template <typename T>
+void single_linked_list<T>::unique()
+{
+    Node<T>* curr = head;
+    T data;
+    while(curr)
+    {
+        data = curr->data;
+        Node<T>* runner = curr;
+        while(runner->next)
+        {
+            if(runner->next->data == data)
+            {
+                Node<T>* temp = runner->next;
+                runner->next = runner->next->next;
+                delete temp;
+            }
+            else
+                runner = runner->next;
+        }
+        curr = curr->next;
+    }
+}
 
-// }
 
-
-//template <typename T>
-// void single_linked_list<T>::sort()
-// {
-//     //std::array<int, 100> arr1;
-//     //quick_sort()
-// }
-
-
+template <typename T>
+void single_linked_list<T>::sort()
+{
+}
 
 //____________________ Clear & Remove  ____________________
 

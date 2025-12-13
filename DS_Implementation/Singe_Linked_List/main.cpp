@@ -166,6 +166,53 @@ int main()
     std::cout << "\n\n";
 
 
+    // ===================================================================
+    //                UNIQUE + SORT TESTS
+    // ===================================================================
+    std::cout << "===== UNIQUE TEST =====\n";
+    single_linked_list<int> dup_nums;
+    dup_nums.push_back(1);
+    dup_nums.push_back(2);
+    dup_nums.push_back(2);
+    dup_nums.push_back(3);
+    dup_nums.push_back(1);
+
+    std::cout << "Before unique: ";
+    for (auto* n = dup_nums.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    dup_nums.unique();
+
+    std::cout << "After unique:  ";
+    for (auto* n = dup_nums.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n\n";
+
+    // ===================================================================
+    //                      SORT TEST
+    // ===================================================================
+    std::cout << "===== SORT TEST =====\n";
+    single_linked_list<int> sort_nums;
+    sort_nums.push_back(5);
+    sort_nums.push_back(1);
+    sort_nums.push_back(4);
+    sort_nums.push_back(2);
+    sort_nums.push_back(3);
+
+    std::cout << "Before sort: ";
+    for (auto* n = sort_nums.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n";
+
+    sort_nums.sort();
+
+    std::cout << "After sort:  ";
+    for (auto* n = sort_nums.first(); n; n = n->next)
+        std::cout << n->data << " ";
+    std::cout << "\n\n";
+
+
 
     // ================================================================
     //            VARIADIC TEMPLATE TESTING (IMPORTANT!)
